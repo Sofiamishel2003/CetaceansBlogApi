@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS blog_posts (
     id SERIAL PRIMARY KEY,
+    role VARCHAR(255) DEFAULT 'Usuario',
     title VARCHAR(255) NOT NULL,
     information TEXT NOT NULL,
     author_id INT NOT NULL,
@@ -32,9 +33,6 @@ BEFORE UPDATE ON blog_posts
 FOR EACH ROW
 EXECUTE FUNCTION update_updated_at_column();
 
-ALTER TABLE users
-ADD COLUMN role VARCHAR(255) DEFAULT 'Usuario';
-
 -- Administrador
---INSERT INTO USERS (USERNAME, PASSWORD_MD5, EMAIL, ROLE) VALUES ('lemoonchild', MD5('reiAdmin21#'), 'lemoonchild@gmail.com', 'Administrador')
+--INSERT INTO USERS (USERNAME, PASSWORD_MD5, EMAIL, ROLE) VALUES ('sapo', MD5('1234#'), 'sapo@gmail.com', 'Administrador')
 
