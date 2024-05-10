@@ -30,16 +30,16 @@ export async function getPostByID (id) {
   return result.rows[0] > 0 ? 'No post found.' : result.rows[0]
 }
 
-export async function createPost (title, information, author_id, author_name, family, diet) {
+export async function createPost (title, information, author_id, author_name, family, diet, funfact) {
   const sql =
-    'INSERT INTO blog_posts (title, information, author_id, author_name, family, diet) VALUES ($1, $2, $3, $4, $5, $6)'
-  await conn.query(sql, [title, information, author_id, author_name, family, diet])
+    'INSERT INTO blog_posts (title, information, author_id, author_name, family, diet,funfact) VALUES ($1, $2, $3, $4, $5, $6, $7)'
+  await conn.query(sql, [title, information, author_id, author_name, family, diet,funfact])
   return true
 }
-export async function updatePost (id, title, information, family, diet) {
+export async function updatePost (id, title, information, family, diet,funfact) {
   const sql =
-    'UPDATE blog_posts SET title = $1, information = $2, family = $3, diet = $4 WHERE id = $5'
-  await conn.query(sql, [title, information, family, diet, id])
+    'UPDATE blog_posts SET title = $1, information = $2, family = $3, diet = $4, funfact = $7 WHERE id = $5'
+  await conn.query(sql, [title, information, family, diet, id, funfact])
   return true
 }
 

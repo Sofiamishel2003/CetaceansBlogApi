@@ -33,6 +33,9 @@ BEFORE UPDATE ON blog_posts
 FOR EACH ROW
 EXECUTE FUNCTION update_updated_at_column();
 
+ALTER TABLE blog_posts
+ADD COLUMN funfact TEXT;
+
 -- Administrador
 --INSERT INTO USERS (USERNAME, PASSWORD_MD5, EMAIL, ROLE) VALUES ('sapo', MD5('1234#'), 'sapo@gmail.com', 'Administrador')
 

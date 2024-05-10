@@ -103,10 +103,10 @@ app.get('/post/:id', async (req, res) => {
 })
 
 app.post('/post', authenticateToken, async (req, res) => {
-  const { title, information, author_id, author_name, family, diet } = req.body
+  const { title, information, author_id, author_name, family, diet, funfact } = req.body
 
   try {
-    await createPost(title, information, author_id, author_name, family, diet)
+    await createPost(title, information, author_id, author_name, family, diet, funfact)
     res.status(201).json({ status: 'success', message: 'Post created successfully.' })
   } catch (error) {
     res.status(500).json({ status: 'failed', error: error.message })
@@ -115,9 +115,9 @@ app.post('/post', authenticateToken, async (req, res) => {
 
 app.put('/post/:id', authenticateToken, async (req, res) => {
   const id = req.params.id
-  const { title, information, family, diet } = req.body
+  const { title, information, family, diet, funfact} = req.body
   try {
-    await updatePost(id, title, information, family, diet)
+    await updatePost(id, title, information, family, diet, funfact)
     res.status(200).json({ status: 'success', message: 'Post updated successfully.' })
   } catch (error) {
     res.status(500).json({ status: 'failed', error: error.message })
