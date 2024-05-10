@@ -1,0 +1,40 @@
+{
+    "name": "CetaceansBlogApi",
+    "version": "1.0.0",
+    "description": "Cetaceans API",
+    "main": "src/main.js",
+    "scripts": {
+      "start": "node src/main.js",
+      "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+      "lint:fix": "eslint . --ext js,jsx --fix"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+ssh://git@github.com:Sofiamishel2003/CetaceansBlogApi.git"
+    },
+    "author": "Sofia Velasquez",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/Sofiamishel2003/CetaceansBlogApi.git/issues"
+    },
+    "homepage": "https://github.com/Sofiamishel2003/CetaceansBlogApi.git#readme",
+    "dependencies": {
+      "cors": "^2.8.5",
+      "dotenv": "^16.4.5",
+      "express": "^4.19.2",
+      "jsonwebtoken": "^9.0.2",
+      "pg": "^8.11.5"
+    },
+    "type": "module",
+    "devDependencies": {
+      "@eslint/js": "^9.2.0",
+      "eslint": "^8.57.0",
+      "eslint-config-standard": "^17.1.0",
+      "eslint-plugin-import": "^2.29.1",
+      "eslint-plugin-n": "^16.6.2",
+      "eslint-plugin-node": "^11.1.0",
+      "eslint-plugin-promise": "^6.1.1",
+      "globals": "^15.1.0"
+    }
+  }
+  
