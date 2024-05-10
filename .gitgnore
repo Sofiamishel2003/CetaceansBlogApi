@@ -1,3 +1,5 @@
+POSTGRES_URL="postgres://default:G9lKOexJBCg5@ep-lively-union-a40xsyxf-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require"
+
 # Logs
 logs
 *.log
