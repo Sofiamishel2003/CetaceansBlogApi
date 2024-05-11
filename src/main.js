@@ -22,7 +22,7 @@ app.use(express.json())
 app.use(bodyParser.json())
 
 app.use(cors({
-  origin: '*'  // Esto permite accesos desde cualquier origen
+  Access-Control-Allow-Origin: *
 }));
 
 const port = 5000
