@@ -22,7 +22,12 @@ app.use(express.json())
 
 app.use(bodyParser.json())
 
-app.use(cors())
+app.use(cors({
+  origin: 'https://my-blog-one-beige-60.vercel.app', // frontend domain
+  credentials: true, // if your frontend sends credentials like cookies or auth headers
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 const port = 5000
 
