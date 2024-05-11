@@ -17,19 +17,12 @@ import {
 import authenticateToken from './middleware.js'
 
 const app = express()
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://my-blog-one-beige-60.vercel.app');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  next();
-});
-
 app.use(express.json())
 
 app.use(bodyParser.json())
 
 app.use(cors({
-  origin: 'https://my-blog-one-beige-60.vercel.app', // frontend domain
+  origin: 'https://cetaceansblog-2ivu7i40m-sofia-velasquezs-projects.vercel.app', // frontend domain
   credentials: true, // if your frontend sends credentials like cookies or auth headers
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
