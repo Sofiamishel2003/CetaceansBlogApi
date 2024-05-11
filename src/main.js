@@ -21,9 +21,8 @@ app.use(express.json())
 
 app.use(bodyParser.json())
 
-app.use(cors({
-  Access-Control-Allow-Origin: *
-}));
+app.use(cors())
+
 
 const port = 5000
 
