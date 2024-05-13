@@ -38,8 +38,8 @@ export async function createPost (title, information, author_id, author_name, fa
 }
 export async function updatePost (id, title, information, family, diet,funfact) {
   const sql =
-    'UPDATE blog_posts SET title = $1, information = $2, family = $3, diet = $4, funfact = $7 WHERE id = $5'
-  await conn.query(sql, [title, information, family, diet, id, funfact])
+    'UPDATE blog_posts SET title = $1, information = $2, family = $3, diet = $4, funfact = $5 WHERE id = $6'
+  await conn.query(sql, [title, information, family, diet, funfact, id])
   return true
 }
 
