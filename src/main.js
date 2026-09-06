@@ -16,6 +16,9 @@ import {
 
 import authenticateToken from './middleware.js'
 
+// isLocal indica si corremos con BD efimera (--local); initDb la prepara.
+import { isLocal, initDb } from './conn.js'
+
 const app = express()
 app.use(express.json())
 
@@ -23,8 +26,8 @@ app.use(bodyParser.json())
 
 app.use(cors())
 
-
-const port = 5000
+// Puerto 3000 en modo local (para los tests del lab), 5000 en modo normal.
+const port = isLocal ? 3000 : 5000
 
 app.get('/', async (req, res) => {
   res.send('Hello world from API!')
@@ -115,7 +118,7 @@ app.post('/post', authenticateToken, async (req, res) => {
 
 app.put('/post/:id', authenticateToken, async (req, res) => {
   const id = req.params.id
-  const { title, information, family, diet, funfact} = req.body
+  const { title, information, family, diet, funfact } = req.body
   try {
     await updatePost(id, title, information, family, diet, funfact)
     res.status(200).json({ status: 'success', message: 'Post updated successfully.' })
@@ -133,6 +136,18 @@ app.delete('/post/:id', async (req, res) => {
   }
 })
 
-app.listen(port, () => {
-  console.log(`Server listening at http://127.0.0.1:${port}`)
-})
+// Prepara la BD y abre el servidor. Se usa una funcion async autoejecutable
+// (no top-level await) para evitar el warning de "unsettled top-level await".
+;(async () => {
+  try {
+    await initDb()
+  } catch (err) {
+    console.error('Fallo al iniciar la base de datos:', err)
+    process.exit(1)
+  }
+
+  app.listen(port, () => {
+    const modo = isLocal ? 'LOCAL (BD efimera en memoria)' : 'NORMAL (BD real)'
+    console.log(`Server listening at http://127.0.0.1:${port} [${modo}]`)
+  })
+})()
