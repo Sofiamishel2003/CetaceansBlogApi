@@ -136,18 +136,25 @@ app.delete('/post/:id', async (req, res) => {
   }
 })
 
-// Prepara la BD y abre el servidor. Se usa una funcion async autoejecutable
-// (no top-level await) para evitar el warning de "unsettled top-level await".
-;(async () => {
-  try {
-    await initDb()
-  } catch (err) {
-    console.error('Fallo al iniciar la base de datos:', err)
-    process.exit(1)
-  }
+// --- Arranque -------------------------------------------------------------
+// En Vercel (serverless) se exporta el app como handler y la plataforma lo
+// invoca: alli NO se debe llamar app.listen(). Como servidor tradicional
+// (tu maquina, local o normal) si se llama listen.
 
-  app.listen(port, () => {
-    const modo = isLocal ? 'LOCAL (BD efimera en memoria)' : 'NORMAL (BD real)'
-    console.log(`Server listening at http://127.0.0.1:${port} [${modo}]`)
-  })
-})()
+export default app
+
+if (!process.env.VERCEL) {
+  ;(async () => {
+    try {
+      await initDb() // en local siembra la BD en memoria; en normal verifica conexion
+    } catch (err) {
+      console.error('Fallo al iniciar la base de datos:', err)
+      process.exit(1)
+    }
+
+    app.listen(port, () => {
+      const modo = isLocal ? 'LOCAL (BD efimera en memoria)' : 'NORMAL (BD real)'
+      console.log(`Server listening at http://127.0.0.1:${port} [${modo}]`)
+    })
+  })()
+}
