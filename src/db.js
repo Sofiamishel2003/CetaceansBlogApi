@@ -33,10 +33,10 @@ export async function getPostByID (id) {
 export async function createPost (title, information, author_id, author_name, family, diet, funfact) {
   const sql =
     'INSERT INTO blog_posts (title, information, author_id, author_name, family, diet,funfact) VALUES ($1, $2, $3, $4, $5, $6, $7)'
-  await conn.query(sql, [title, information, author_id, author_name, family, diet,funfact])
+  await conn.query(sql, [title, information, author_id, author_name, family, diet, funfact])
   return true
 }
-export async function updatePost (id, title, information, family, diet,funfact) {
+export async function updatePost (id, title, information, family, diet, funfact) {
   const sql =
     'UPDATE blog_posts SET title = $1, information = $2, family = $3, diet = $4, funfact = $5 WHERE id = $6'
   await conn.query(sql, [title, information, family, diet, funfact, id])
